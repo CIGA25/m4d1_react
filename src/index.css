@@ -20,7 +20,6 @@ body {
   "home"
   "pie";
   grid-template-rows: auto 1fr auto;
-
 }
 
 nav {
@@ -170,6 +169,8 @@ header p {
   background-color: #000000;
   color: #ffffff;
   padding: 16px 12px 16px 12px;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
 }
 
 .pie a {
@@ -177,4 +178,80 @@ header p {
   font-size: 24px;
   text-decoration: none;
   color: #ffffff;
+}
+
+#registro {
+  display: flex;
+  flex-direction: column;
+  gap: 92px;
+  padding: 16px;
+  border: 2px solid black;
+  border-radius: 16px;
+  width: 50%;
+  margin: 0 auto;
+  background-color: #ffffff;
+  object-fit: cover;
+  background-size: auto 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #000000;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-reg {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+}
+
+.input-reg label {
+  font-family: "Notable", sans-serif;
+  font-size: 20px;
+}
+
+.input-reg input {
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.input-reg input::placeholder {
+  font-size: 12px;
+  font-style: italic;
+}
+
+.reg-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.reg-page h3 {
+  font-family: "Notable", sans-serif;
+  font-size: 40px;
+}
+
+button[type="submit"] {
+    background-color: #000000;
+    width: 60%;
+    margin: auto;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+}
+
+.error-text {
+  color: #ff0000;
+  font-style: italic;
+  font-size: 12px;
+  font-weight: bold;
+  position: absolute;
+  bottom: -16px;
 }
