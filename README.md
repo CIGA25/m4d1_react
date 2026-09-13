@@ -1,6 +1,6 @@
-# Desafío 1 Módulo 4: Mamma Mía 🍕
+# Desafío Módulo 4: Mamma Mía 🍕
 
-Este repositorio contiene el proyecto desarrollado para el **Desafío 1 del Módulo 4** del bootcamp de **Desarrollo Front-End**.
+Este repositorio contiene el proyecto desarrollado para el **Desafío Mamma Mía del Módulo 4** del bootcamp de **Desarrollo Front-End**.
 El objetivo principal es ejercitar la creación de interfaces utilizando **Vite y React**, aplicando componentes reutilizables, propiedades, organización modular de archivos y estilos CSS para construir una página web de una pizzería.
 
 ---
@@ -61,7 +61,9 @@ Mamma Mía/
 │   │   ├── Footer.jsx            # Pie de página de la aplicación
 │   │   ├── Header.jsx            # Encabezado principal con imagen destacada
 │   │   ├── Home.jsx              # Vista principal y catálogo de productos
-│   │   └── Navbar.jsx            # Barra de navegación
+|   |   ├── Login.jsx             # Formulario de inicio de sesión
+│   │   ├── Navbar.jsx            # Barra de navegación
+|   |   └── Register.jsx          # Formulario de registro
 │   ├── utils/
 │   │   └── formato.js            # Función para formatear los precios
 │   ├── App.css                   # Hoja de estilos adicional de la aplicación
