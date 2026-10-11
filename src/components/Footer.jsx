@@ -1,7 +1,9 @@
+import { Link } from "react-router"
+
 function Footer() {
   return (
     <footer className="pie">
-        <a href="#"><h3>Mamma Mía</h3></a>
+        <Link to="/"><h3>Mamma Mía</h3></Link>
         <div>
             <p>©2026 - Todos los derechos reservados</p>
         </div>

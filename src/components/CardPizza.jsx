@@ -5,6 +5,7 @@ import Medite from "../assets/img/medite.webp"
 import Spain from "../assets/img/spain.webp"
 import Cuatro from "../assets/img/cuatro.webp"
 import Bacon from "../assets/img/bacon.webp"
+import { useNavigate } from "react-router";
 
 const imagenesLocales = {
   napolitana: Napo,
@@ -26,6 +27,8 @@ function CardPizza({name, price, desc, ingredients, image}) {
     e.target.src = imagenesLocales[idImg] || Napo;
   };
 
+  const navigate = useNavigate();
+
   return (
     <div className="card">
         <img 
@@ -44,7 +47,10 @@ function CardPizza({name, price, desc, ingredients, image}) {
         </ul>
         <div className="buy">
           <h5>${formatPrice([price])}</h5>
-          <button>Agregar al carrito</button>
+          <div className="buyBtns">
+            <button onClick={()=>navigate("/pizza/p001")}>Ver más</button>
+            <button>Agregar al carrito</button>
+          </div>
         </div>
     </div>
   )

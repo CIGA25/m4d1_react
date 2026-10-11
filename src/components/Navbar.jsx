@@ -1,27 +1,29 @@
 import { formatPrice } from "../utils/formato";
+import { Link, useNavigate } from 'react-router';
 
 function Navbar() {
     const token = true;
-    const total = 25000
+    const total = 25000;
+    const navigate = useNavigate();
 
     return(
         <nav>
-            <a href="#"><h2>Mamma Mía</h2></a>
+            <Link to="/"><h2>Mamma Mía</h2></Link>
             <div className="btn-box">
                 <div className="btn-nav">
                     {token ? (
                         <>
-                            <a className="perfil" href="#">Profile</a>
-                            <a href="#">Logout</a>
+                            <Link className="perfil" to="/profile">Profile</Link>
+                            <Link to="/">Logout</Link>
                         </>
                     ) : (
                         <>
-                            <a href="#">Login</a>
-                            <a className="reg" href="#">Register</a>
+                            <Link to="/login">Login</Link>
+                            <Link className="reg" to="/register">Register</Link>
                         </>
                     )}
                 </div>
-                <button>Total: ${formatPrice(total)}</button>
+                <button onClick={()=>navigate("/cart")} >Total: ${formatPrice(total)}</button>
             </div>
         </nav>
     )
