@@ -1,35 +1,49 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { formatPrice } from '../../utils/formato'
-import Napo from "../img/napo.webp"
+import Napo from "../img/napo.webp";
+import Jardin from "../img/jardin.webp";
+import Medite from "../img/medite.webp";
+import Spain from "../img/spain.webp";
+import Cuatro from "../img/cuatro.webp";
+import Bacon from "../img/bacon.webp";
+import { useParams } from 'react-router';
+import { PizzasContext } from '../../contexts/PizzasContext';
+import { CartContext } from '../../contexts/CartContext';
 
 const imagenLocal = {
-  napolitana: Napo
+  napolitana: Napo,
+  jardinera: Jardin,
+  mediterranea: Medite,
+  española: Spain,
+  estaciones: Cuatro,
+  bacon: Bacon,
 };
 
 function Pizza() {
-    const [slice, setSlice] = useState([])
+  const { id } = useParams();
+  const { pizzas, getPizzaById } = useContext(PizzasContext);
+  const { agregarCart } = useContext(CartContext);
+  const [slice, setSlice] = useState(null);
 
-    useEffect(()=>{
-        async function getPizza() {
-          try {
-            const res = await fetch("http://localhost:5000/api/pizzas/p001")
-            const data = await res.json()
-            setSlice(data)
-          } catch (error) {
-            console.error("Obteniendo la información...", error)
-          }
-        }
-        getPizza()
-    },[])
+    useEffect(() => {
+    const targetId = id || "p001";
+    const pizzaEncontrada = pizzas.find((p) => p.id === targetId);
 
-    const handleImageError = (e) => {
-        e.target.onerror = null;
-        const nombreNormalizado = slice.name?.toLowerCase() || "";
-        const idImg = Object.keys(imagenLocal).find((key) =>
-          nombreNormalizado.includes(key)
-        );
-        e.target.src = imagenLocal[idImg] || Napo;
-      };
+    if (pizzaEncontrada) {
+      setSlice(pizzaEncontrada);
+    } else {
+      getPizzaById(targetId).then((data) => setSlice(data));
+    }
+  }, [id, pizzas, getPizzaById]);
+
+  const handleImageError = (e) => {
+    e.target.onerror = null;
+    const nombreNormalizado = slice?.name?.toLowerCase() || "";
+    const idImg = Object.keys(imagenLocal).find((key) =>
+      nombreNormalizado.includes(key)
+    );
+    e.target.src = imagenLocal[idImg] || Napo;
+  };
 
     if (!slice) {
         return <p>Cargando información de la pizza...</p>;
@@ -53,7 +67,7 @@ function Pizza() {
                 </ul>
                 <div className="buy">
                   <h5>${formatPrice([slice.price])}</h5>
-                  <button>Agregar al carrito</button>
+                  <button onClick={() => agregarCart(slice)} >Agregar al carrito</button>
                 </div>
         </div>
     )

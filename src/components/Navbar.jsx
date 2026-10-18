@@ -1,10 +1,12 @@
+import { useContext } from "react";
 import { formatPrice } from "../utils/formato";
 import { Link, useNavigate } from 'react-router';
+import { CartContext } from "../contexts/CartContext";
 
 function Navbar() {
     const token = true;
-    const total = 25000;
     const navigate = useNavigate();
+    const { total } = useContext(CartContext)
 
     return(
         <nav>

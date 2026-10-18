@@ -1,35 +1,33 @@
-import React from 'react'
-import { pizzaCart } from '../../utils/pizzas'
-import { useState } from 'react'
+import { useContext } from 'react'
 import { formatPrice } from '../../utils/formato'
+import { CartContext } from '../../contexts/CartContext'
+import Napo from '../../assets/img/napo.webp'
+import Jardin from '../../assets/img/jardin.webp'
+import Medite from '../../assets/img/medite.webp'
+import Spain from '../../assets/img/spain.webp'
+import Cuatro from '../../assets/img/cuatro.webp'
+import Bacon from '../../assets/img/bacon.webp'
+
+const imagenesLocales = {
+  napolitana: Napo,
+  jardinera: Jardin,
+  mediterranea: Medite,
+  española: Spain,
+  estaciones: Cuatro,
+  bacon: Bacon,
+}
 
 function Cart() {
-    const [cart, setCart] = useState(pizzaCart)
+    const { cart, sumarPizza, restarPizza, total } = useContext(CartContext)
 
-    const sumar = (id) => {
-        const nuevoC = cart.map((pizza) => {
-            if (pizza.id === id) {
-                return { ...pizza, count: pizza.count + 1 };
-            }
-            return pizza;
-        });
-        setCart(nuevoC);
-    };
-    
-    const restar = (id) => {
-        const nuevoC = cart.map((pizza) => {
-            if (pizza.id === id) {
-                return { ...pizza, count: pizza.count - 1 };
-            }
-            return pizza;
-        }).filter((pizza) => pizza.count > 0);
-        setCart(nuevoC);
-    };
-
-    let total = 0;
-    cart.forEach((pizza => {
-        total += pizza.price * pizza.count
-    }));
+    const handleImageError = (e, name) => {
+    e.target.onerror = null
+    const nombreNormalizado = name?.toLowerCase() || ''
+    const idImg = Object.keys(imagenesLocales).find((key) =>
+      nombreNormalizado.includes(key)
+    )
+    e.target.src = imagenesLocales[idImg] || Napo
+  }
 
   return (
     <section id='carrito'>
@@ -42,14 +40,18 @@ function Cart() {
                 cart.map((pizza)=>{
                     return(
                         <div key={pizza.id} className='pizzaCard'>
-                            <img src={pizza.img} alt="Imagen representativa de la pizza ofrecida"/>
+                            <img 
+                                src={pizza.img} 
+                                alt="Imagen representativa de la pizza ofrecida" 
+                                onError={(e) => handleImageError(e, pizza.name)}
+                            />
                             <div className='item'>
                                 <h3>{pizza.name}</h3>
                                 <h4>${formatPrice([pizza.price])}</h4>
                                 <div className='cantidad'>
-                                    <button disabled={pizza.count === 0} onClick={()=>restar(pizza.id)}>-</button>
+                                    <button disabled={pizza.count === 0} onClick={()=>restarPizza(pizza.id)}>-</button>
                                     <h4>{pizza.count}</h4>
-                                    <button onClick={()=>sumar(pizza.id)}>+</button>
+                                    <button onClick={()=>sumarPizza(pizza.id)}>+</button>
                                 </div>
                             </div>
                         </div>

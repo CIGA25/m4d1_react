@@ -1,25 +1,13 @@
 import CardPizza from "../../components/CardPizza";
 import Header from "../../components/Header";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { PizzasContext } from "../../contexts/PizzasContext";
 
 function Home() {
-  const [pizzas, setPizzas] = useState([]);
+  const { pizzas, loading } = useContext(PizzasContext)
 
-  useEffect(() => {
-    async function getPizzas() {
-      try {
-        const res = await fetch("http://localhost:5000/api/pizzas");
-        const data = await res.json();
-        setPizzas(data);
-      } catch (error) {
-        console.error("Cargando catálogo...", error);
-      }
-    }
-    getPizzas();
-  }, []);
-
-  if (!pizzas) {
-    return <p>Cargando información...</p>;
+  if (loading) {
+    return <p>Cargando pizzas...</p>;
   }
 
   return (
@@ -30,6 +18,7 @@ function Home() {
           return (
             <CardPizza
               key={pizza.id}
+              id={pizza.id}
               name={pizza.name}
               price={pizza.price}
               image={pizza.img}
@@ -43,4 +32,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Home

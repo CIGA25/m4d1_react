@@ -1,11 +1,13 @@
 import { formatPrice } from "../utils/formato";
+import { useNavigate } from "react-router";
+import { useContext } from "react";
+import { CartContext } from "../contexts/CartContext";
 import Napo from "../assets/img/napo.webp"
 import Jardin from "../assets/img/jardin.webp"
 import Medite from "../assets/img/medite.webp"
 import Spain from "../assets/img/spain.webp"
 import Cuatro from "../assets/img/cuatro.webp"
 import Bacon from "../assets/img/bacon.webp"
-import { useNavigate } from "react-router";
 
 const imagenesLocales = {
   napolitana: Napo,
@@ -16,7 +18,9 @@ const imagenesLocales = {
   bacon: Bacon,
 };
 
-function CardPizza({name, price, desc, ingredients, image}) {
+function CardPizza({id, name, price, desc, ingredients, image}) {
+  const navigate = useNavigate();
+  const { agregarCart } =useContext(CartContext)
 
   const handleImageError = (e) => {
     e.target.onerror = null;
@@ -26,8 +30,6 @@ function CardPizza({name, price, desc, ingredients, image}) {
     );
     e.target.src = imagenesLocales[idImg] || Napo;
   };
-
-  const navigate = useNavigate();
 
   return (
     <div className="card">
@@ -46,10 +48,10 @@ function CardPizza({name, price, desc, ingredients, image}) {
           })}
         </ul>
         <div className="buy">
-          <h5>${formatPrice([price])}</h5>
+          <h5>${formatPrice(price)}</h5>
           <div className="buyBtns">
-            <button onClick={()=>navigate("/pizza/p001")}>Ver más</button>
-            <button>Agregar al carrito</button>
+            <button onClick={()=>navigate(`/pizza/${id}`)}>Ver más</button>
+            <button onClick={() => agregarCart({ id, name, price, img: image, desc, ingredients })}>Agregar al carrito</button>
           </div>
         </div>
     </div>
