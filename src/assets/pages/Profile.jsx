@@ -1,26 +1,3 @@
-/*import React from 'react'
-import { useNavigate } from 'react-router'
-
-function Profile() {
-  const navigate = useNavigate()
-  return (
-    <section>
-        <img src="" alt="Imagen de perfil del usuario" />
-        <h3>Juan Perez</h3>
-        <div>
-            <h5>RUT: </h5>
-            <h5>Edad: </h5>
-            <h5>Dirección: </h5>
-            <h5>Teléfono: </h5>
-            <h5>Email: </h5>
-        </div>
-        <button onClick={()=>navigate("/")} >Cerrar sesión</button>
-    </section>
-  )
-}
-
-export default Profile*/
-
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 
@@ -33,7 +10,6 @@ function Profile() {
       try {
         const res = await fetch("https://randomuser.me/api/")
         const data = await res.json()
-        // La API devuelve un arreglo en data.results, tomamos el primer usuario
         setUser(data.results[0])
       } catch (error) {
         console.error("Error al obtener la información del usuario:", error)
@@ -41,7 +17,6 @@ function Profile() {
     }
     getUser()
   }, [])
-  // Si ocurrió un error en la petición y no hay usuario
   if (!user) {
     return <p>No se pudo cargar la información del usuario.</p>
   }

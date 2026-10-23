@@ -7,6 +7,7 @@ import Medite from '../../assets/img/medite.webp'
 import Spain from '../../assets/img/spain.webp'
 import Cuatro from '../../assets/img/cuatro.webp'
 import Bacon from '../../assets/img/bacon.webp'
+import { UserContext } from '../../contexts/UserContext'
 
 const imagenesLocales = {
   napolitana: Napo,
@@ -18,7 +19,8 @@ const imagenesLocales = {
 }
 
 function Cart() {
-    const { cart, sumarPizza, restarPizza, total } = useContext(CartContext)
+    const { cart, sumarPizza, restarPizza, total } = useContext(CartContext);
+    const { token } = useContext(UserContext);
 
     const handleImageError = (e, name) => {
     e.target.onerror = null
@@ -27,7 +29,7 @@ function Cart() {
       nombreNormalizado.includes(key)
     )
     e.target.src = imagenesLocales[idImg] || Napo
-  }
+  };
 
   return (
     <section id='carrito'>
@@ -63,7 +65,7 @@ function Cart() {
                     <h2>Total:</h2>
                     <p>${formatPrice([total])}</p>
                 </div>
-                <button disabled={total === 0}>Pagar</button>
+                <button disabled={!token || total === 0}>Pagar</button>
             </div>
         </div>
     </section>

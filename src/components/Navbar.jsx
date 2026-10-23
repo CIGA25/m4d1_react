@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { formatPrice } from "../utils/formato";
-import { Link, useNavigate } from 'react-router';
+import { Link, NavLink, useNavigate } from 'react-router';
 import { CartContext } from "../contexts/CartContext";
+import { UserContext } from "../contexts/UserContext";
 
 function Navbar() {
-    const token = true;
     const navigate = useNavigate();
-    const { total } = useContext(CartContext)
+    const { total } = useContext(CartContext);
+    const {token, logout} = useContext(UserContext);
 
     return(
         <nav>
@@ -15,13 +16,13 @@ function Navbar() {
                 <div className="btn-nav">
                     {token ? (
                         <>
-                            <Link className="perfil" to="/profile">Profile</Link>
-                            <Link to="/">Logout</Link>
+                            <NavLink className={ ({isActive}) => (isActive == true ? "activeBtn" : "")} to="/profile">Profile</NavLink>
+                            <NavLink onClick={logout} to="/">Logout</NavLink>
                         </>
                     ) : (
                         <>
-                            <Link to="/login">Login</Link>
-                            <Link className="reg" to="/register">Register</Link>
+                            <NavLink className={ ({isActive}) => (isActive == true ? "activeBtn" : "")} to="/login">Login</NavLink>
+                            <NavLink className={ ({isActive}) => (isActive == true ? "activeBtn" : "")} to="/register">Register</NavLink>
                         </>
                     )}
                 </div>

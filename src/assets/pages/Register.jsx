@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 function Register() {
     const [email, setEmail] = useState("");
@@ -6,6 +7,7 @@ function Register() {
     const [okPass, setOkPass] = useState("");
     const [errorPass, setErrorPass] = useState("");
     const [errorOkPass, setErrorOkPass] = useState("");
+    const navigate = useNavigate();
 
     const validarCampos = (d) => {
         d.preventDefault();
@@ -20,6 +22,7 @@ function Register() {
             setOkPass("");
             setErrorPass("");
             setErrorOkPass("");
+            navigate("/");
         }
     };
 

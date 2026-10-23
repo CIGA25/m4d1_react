@@ -67,7 +67,7 @@ h2 {
   padding: 8px 12px;
 }
 
-.btn-nav a:is(.perfil, .reg) {
+.btn-nav a.activeBtn {
   background-color: #000000;
   color: #ffffff;
 }

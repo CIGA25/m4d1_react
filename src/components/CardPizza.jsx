@@ -20,7 +20,7 @@ const imagenesLocales = {
 
 function CardPizza({id, name, price, desc, ingredients, image}) {
   const navigate = useNavigate();
-  const { agregarCart } =useContext(CartContext)
+  const { agregarCart } =useContext(CartContext);
 
   const handleImageError = (e) => {
     e.target.onerror = null;
