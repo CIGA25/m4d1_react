@@ -67,12 +67,12 @@ http://localhost:5000
 
 ### Endpoints utilizados:
 
-`GET /api/pizzas`: obtiene el catálogo de pizzas.
-`GET /api/pizzas/:id`: obtiene el detalle de una pizza.
-`POST /api/auth/register`: registra un nuevo usuario.
-`POST /api/auth/login`: inicia sesión y obtiene el token.
-`GET /api/auth/me`: obtiene los datos del usuario autenticado.
-`POST /api/checkouts`: procesa una compra.
+* `GET /api/pizzas`: obtiene el catálogo de pizzas.
+* `GET /api/pizzas/:id`: obtiene el detalle de una pizza.
+* `POST /api/auth/register`: registra un nuevo usuario.
+* `POST /api/auth/login`: inicia sesión y obtiene el token.
+* `GET /api/auth/me`: obtiene los datos del usuario autenticado.
+* `POST /api/checkouts`: procesa una compra.
 
 ---
 
