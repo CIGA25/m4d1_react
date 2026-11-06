@@ -19,11 +19,11 @@ function App() {
             <Navbar/>
             <Routes>
                 <Route path="/" element={<Home/>} />
-                <Route path="/register" element={token == false ? <Register/> : <Navigate to="/"/> } />
-                <Route path="/login" element={token == false ? <Login/> : <Navigate to="/"/> } />
-                <Route path="/cart" element={token == true ? <Cart/> : <Navigate to="/login"/> } />
+                <Route path="/register" element={!token ? <Register/> : <Navigate to="/"/> } />
+                <Route path="/login" element={!token ? <Login/> : <Navigate to="/"/> } />
+                <Route path="/cart" element={token ? <Cart/> : <Navigate to="/login"/> } />
                 <Route path="/pizza/:id" element={<Pizza/>} />
-                <Route path="/profile" element={token == true ? <Profile/> : <Navigate to="/login"/> } />
+                <Route path="/profile" element={token ? <Profile/> : <Navigate to="/login"/> } />
                 <Route path="*" element={<NotFound/>} />
             </Routes>
             <Footer/>

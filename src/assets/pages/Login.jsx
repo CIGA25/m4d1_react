@@ -9,19 +9,21 @@ function Login() {
     const navigate = useNavigate();
     const { login } = useContext(UserContext);
 
-    const validarCampos = (d) => {
+    const validarCampos = async (d) => {
         d.preventDefault();
         if (!email.trim() || !pass.trim()) {
             alert("Por favor, completa todos los campos.");
         } else if (errorPass) {
             alert("Por favor, corrige los errores antes de continuar.");
         } else {
-            alert("¡Ya puedes pedir tu pizza!");
-            setEmail("");
-            setPass("");
-            setErrorPass("");
-            login();
-            navigate("/")
+            const exito = await login(email, pass);
+            if (exito) {
+                alert("¡Bienvenido! Ya puedes pedir tu pizza.");
+                setEmail("");
+                setPass("");
+                setErrorPass("");
+                navigate("/");
+            }
         }
     };
 

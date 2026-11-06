@@ -6,7 +6,9 @@ El objetivo principal es construir una aplicación web para una pizzería utiliz
 ---
 
 ## 🔗 Revisa Aquí
+```
 https://ciga25.github.io/m4d1_react/
+```
 
 ## 🎯 Descripción del Proyecto
 
@@ -27,7 +29,7 @@ La aplicación cuenta con navegación entre distintas vistas, autenticación sim
   * Posibilidad de añadir pizzas, incrementar/decrementar cantidades y remover productos al llegar a cero.
   * Cálculo dinámico y en tiempo real del total a pagar.
 * **Gestión de sesión y autenticación (`UserContext`):**
-  * Estado global de autenticación (`token`).
+  * Autenticación mediante (`token`).
   * Simulación de inicio de sesión (`login`) y cierre de sesión (`logout`).
   * Formularios de inicio de sesión (`Login`) y registro (`Register`) con validaciones.
   * Vista de perfil de usuario (`Profile`) con opción para cerrar sesión.
@@ -53,6 +55,24 @@ La aplicación cuenta con navegación entre distintas vistas, autenticación sim
 * **ESLint:** Linter para garantizar estándares de código y buenas prácticas.
 * **Google Fonts:** Tipografía destacada (`Notable`) para la identidad visual de la marca.
 * **GitHub Pages (`gh-pages`):** Despliegue continuo y hosting de la aplicación web.
+
+---
+
+## 🔌 API utilizada
+
+La aplicación espera que el backend esté disponible en:
+```
+http://localhost:5000
+```
+
+### Endpoints utilizados:
+
+`GET /api/pizzas`: obtiene el catálogo de pizzas.
+`GET /api/pizzas/:id`: obtiene el detalle de una pizza.
+`POST /api/auth/register`: registra un nuevo usuario.
+`POST /api/auth/login`: inicia sesión y obtiene el token.
+`GET /api/auth/me`: obtiene los datos del usuario autenticado.
+`POST /api/checkouts`: procesa una compra.
 
 ---
 
@@ -108,12 +128,12 @@ Mamma Mía/
 
 ## 📌 Consideraciones
 
-* El estado de autenticación se maneja de forma simulada en el frontend.
+* La aplicación requiere que el backend esté activo en el puerto `5000`.
+* La autenticación se gestiona mediante tokens entregados por la API.
 * El carrito se mantiene únicamente mientras la aplicación está abierta.
-* No existe persistencia de usuarios ni pedidos en una base de datos.
-* El catálogo depende de que la API local esté disponible.
-* Si la API no responde, la aplicación muestra mensajes de carga o error en las vistas correspondientes.
-* La información del perfil se genera utilizando datos aleatorios provenientes de `randomuser.me`.
+* Los usuarios y pedidos se gestionan desde el backend.
+* Si la API no está disponible, algunas vistas mostrarán errores o no podrán cargar información.
+* La aplicación está desplegada en **GitHub Pages**.
 
 ---
 

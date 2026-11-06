@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router';
+import { UserContext } from '../../contexts/UserContext';
 
 function Register() {
     const [email, setEmail] = useState("");
@@ -8,21 +9,25 @@ function Register() {
     const [errorPass, setErrorPass] = useState("");
     const [errorOkPass, setErrorOkPass] = useState("");
     const navigate = useNavigate();
+    const { register } = useContext(UserContext);
 
-    const validarCampos = (d) => {
+    const validarCampos = async (d) => {
         d.preventDefault();
         if (!email.trim() || !pass.trim() || !okPass.trim()) {
             alert("Por favor, completa todos los campos.");
         } else if (errorPass || errorOkPass) {
             alert("Por favor, corrige los errores antes de continuar.");
         } else {
-            alert("¡Ya puedes pedir tu pizza!");
-            setEmail("");
-            setPass("");
-            setOkPass("");
-            setErrorPass("");
-            setErrorOkPass("");
-            navigate("/");
+            const exito = await register(email, pass);
+            if (exito) {
+                alert("¡Cuenta creada exitosamente!");
+                setEmail("");
+                setPass("");
+                setOkPass("");
+                setErrorPass("");
+                setErrorOkPass("");
+                navigate("/");
+            }
         }
     };
 
@@ -63,8 +68,7 @@ function Register() {
                     type="email" 
                     placeholder='tu@email.com' 
                     name="email" 
-                    id="correo" 
-                    /*required*/
+                    id="correo"
                     onChange={validarPass}
                     value={email}
                 />
@@ -75,8 +79,7 @@ function Register() {
                     type="password" 
                     placeholder='Ingresa tu contraseña' 
                     name="password" 
-                    id="pass" 
-                    /*required */
+                    id="pass"
                     onChange={validarPass}
                     value={pass}
                 />
